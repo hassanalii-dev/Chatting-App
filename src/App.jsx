@@ -118,7 +118,7 @@ export default function ChatApp() {
 
               <div className="min-w-0">
                 <h1 className="truncate text-base font-bold text-white sm:text-lg">
-                  Room: {groupName}
+                  Group: {groupName}
                 </h1>
 
                 <div className="mt-1 flex items-center gap-2">
@@ -185,7 +185,7 @@ export default function ChatApp() {
                               : "rounded-bl-sm border border-slate-800 bg-slate-900 text-slate-300"
                           }`}
                         >
-                          <span className="font-semibold">
+                          <span className="font-bold text-white">
                             {msg.sender}:
                           </span>{" "}
                           {msg.text}
