@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function ChatApp() {
   const [username, setUsername] = useState("");
@@ -7,6 +8,19 @@ export default function ChatApp() {
 
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+
+    async function fetchProducts() {
+      try {
+        const productRes = await axios.get("http://localhost:5050/products");
+        console.log(productRes.data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    useEffect(() => {
+    fetchProducts();
+  }, []);
 
   const handleJoin = (e) => {
     e.preventDefault();
