@@ -509,7 +509,7 @@ export default function ChatApp() {
         <div className="flex min-h-[100dvh] w-full items-center justify-center px-4 py-6 sm:min-h-0 sm:max-w-md sm:px-0">
           <div className="w-full rounded-3xl border border-white/10 bg-slate-900/90 p-5 shadow-2xl backdrop-blur-xl sm:p-7 md:p-8">
             <div className="mb-7 text-center">
-              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 shadow-indigo-500/20 sm:h-16 sm:w-16">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-500/20 sm:h-16 sm:w-16">
                 <img
                   src="/image copy 3.png"
                   alt="Chat Logo"
@@ -853,7 +853,7 @@ export default function ChatApp() {
                 </span>
 
                 <span className="xs:hidden">
-                  Send
+                  ➤
                 </span>
               </button>
             </form>
@@ -891,6 +891,7 @@ export default function ChatApp() {
                 }
               >
                 <span className="sm:hidden">
+                  Download
                 </span>
 
                 <span className="hidden sm:inline">
