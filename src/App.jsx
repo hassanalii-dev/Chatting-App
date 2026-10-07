@@ -161,7 +161,7 @@ export default function ChatApp() {
         hour: "2-digit",
         minute: "2-digit",
       }),
-      status: "sent",
+      status: "delivered",
     };
 
     socket.emit("send", newMessage);
@@ -305,7 +305,7 @@ export default function ChatApp() {
           minute: "2-digit",
         }),
 
-        status: "sent",
+        status: "delivered",
       };
 
       socket.emit("send", fileMessage);
