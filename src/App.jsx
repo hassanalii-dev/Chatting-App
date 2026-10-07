@@ -153,12 +153,7 @@ export default function ChatApp() {
       return "0 Bytes";
     }
 
-    const units = [
-      "Bytes",
-      "KB",
-      "MB",
-      "GB",
-    ];
+    const units = ["Bytes", "KB", "MB", "GB"];
 
     const index = Math.floor(
       Math.log(bytes) / Math.log(1024)
@@ -293,7 +288,7 @@ export default function ChatApp() {
   const renderFileMessage = (msg) => {
     if (msg.fileType?.startsWith("image/")) {
       return (
-        <div className="overflow-hidden rounded-xl">
+        <div className="w-full overflow-hidden rounded-xl">
           <button
             type="button"
             onClick={(e) => {
@@ -305,12 +300,12 @@ export default function ChatApp() {
             <img
               src={msg.fileData}
               alt={msg.fileName}
-              className="max-h-80 w-full rounded-xl object-contain transition hover:opacity-90"
+              className="max-h-[280px] w-full rounded-xl object-contain transition hover:opacity-90 sm:max-h-80"
             />
           </button>
 
-          <div className="mt-2 flex items-center justify-between gap-3">
-            <div className="min-w-0">
+          <div className="mt-2 flex items-center justify-between gap-2">
+            <div className="min-w-0 flex-1">
               <p className="truncate text-xs font-medium">
                 {msg.fileName}
               </p>
@@ -323,7 +318,7 @@ export default function ChatApp() {
             <a
               href={msg.fileData}
               download={msg.fileName}
-              className="rounded-lg bg-black/20 px-3 py-1.5 text-xs font-semibold hover:bg-black/30"
+              className="shrink-0 rounded-lg bg-black/20 px-2.5 py-1.5 text-[10px] font-semibold hover:bg-black/30 sm:px-3 sm:text-xs"
               onClick={(e) => e.stopPropagation()}
             >
               Download
@@ -335,7 +330,7 @@ export default function ChatApp() {
 
     if (msg.fileType?.startsWith("video/")) {
       return (
-        <div className="max-w-sm">
+        <div className="w-full max-w-sm">
           <button
             type="button"
             onClick={(e) => {
@@ -346,19 +341,19 @@ export default function ChatApp() {
           >
             <video
               src={msg.fileData}
-              className="max-h-80 w-full rounded-xl object-contain"
+              className="max-h-[280px] w-full rounded-xl object-contain sm:max-h-80"
               preload="metadata"
             />
 
             <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition hover:opacity-100">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 text-2xl text-slate-900 shadow-xl">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-xl text-slate-900 shadow-xl sm:h-14 sm:w-14 sm:text-2xl">
                 ▶
               </div>
             </div>
           </button>
 
-          <div className="mt-2 flex items-center justify-between gap-3">
-            <div className="min-w-0">
+          <div className="mt-2 flex items-center justify-between gap-2">
+            <div className="min-w-0 flex-1">
               <p className="truncate text-xs font-medium">
                 {msg.fileName}
               </p>
@@ -371,7 +366,7 @@ export default function ChatApp() {
             <a
               href={msg.fileData}
               download={msg.fileName}
-              className="rounded-lg bg-black/20 px-3 py-1.5 text-xs font-semibold hover:bg-black/30"
+              className="shrink-0 rounded-lg bg-black/20 px-2.5 py-1.5 text-[10px] font-semibold hover:bg-black/30 sm:px-3 sm:text-xs"
               onClick={(e) => e.stopPropagation()}
             >
               Download
@@ -383,7 +378,7 @@ export default function ChatApp() {
 
     if (msg.fileType?.startsWith("audio/")) {
       return (
-        <div className="min-w-[240px] max-w-sm">
+        <div className="w-full min-w-0 max-w-sm sm:min-w-[240px]">
           <button
             type="button"
             onClick={(e) => {
@@ -392,7 +387,7 @@ export default function ChatApp() {
             }}
             className="flex w-full cursor-pointer items-center gap-3 rounded-xl p-2 text-left transition hover:bg-black/10"
           >
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-black/20 text-2xl">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-black/20 text-xl sm:h-12 sm:w-12 sm:text-2xl">
               🎵
             </div>
 
@@ -414,7 +409,7 @@ export default function ChatApp() {
           <a
             href={msg.fileData}
             download={msg.fileName}
-            className="mt-2 inline-block rounded-lg bg-black/20 px-3 py-1.5 text-xs font-semibold hover:bg-black/30"
+            className="mt-2 inline-block rounded-lg bg-black/20 px-3 py-1.5 text-[10px] font-semibold hover:bg-black/30 sm:text-xs"
             onClick={(e) => e.stopPropagation()}
           >
             Download
@@ -424,8 +419,8 @@ export default function ChatApp() {
     }
 
     return (
-      <div className="flex min-w-[230px] max-w-sm items-center gap-3">
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-black/20 text-2xl">
+      <div className="flex w-full min-w-0 max-w-sm items-center gap-3">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-black/20 text-xl sm:h-12 sm:w-12 sm:text-2xl">
           {getFileIcon(msg.fileType)}
         </div>
 
@@ -441,7 +436,7 @@ export default function ChatApp() {
           <a
             href={msg.fileData}
             download={msg.fileName}
-            className="mt-2 inline-block rounded-lg bg-black/20 px-3 py-1.5 text-xs font-semibold hover:bg-black/30"
+            className="mt-2 inline-block rounded-lg bg-black/20 px-3 py-1.5 text-[10px] font-semibold hover:bg-black/30 sm:text-xs"
             onClick={(e) => e.stopPropagation()}
           >
             Download
@@ -452,21 +447,22 @@ export default function ChatApp() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 px-4 py-6 sm:py-10">
+    <div className="min-h-screen w-full overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 px-3 py-3 sm:px-5 sm:py-6 md:px-8 lg:flex lg:items-center lg:justify-center lg:py-8">
 
+      {/* JOIN SCREEN */}
       {!joined ? (
-        <div className="w-full max-w-md rounded-3xl border border-white/10 bg-slate-900/90 p-6 shadow-2xl backdrop-blur-xl sm:p-8">
+        <div className="w-full max-w-md rounded-3xl border border-white/10 bg-slate-900/90 p-5 shadow-2xl backdrop-blur-xl sm:p-8">
 
           <div className="mb-7 text-center">
-            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600">
+            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 shadow-lg shadow-indigo-500/20 sm:h-16 sm:w-16">
               <img
                 src="/image copy 3.png"
                 alt="Chat Logo"
-                className="h-full w-full rounded-2xl object-cover"
+                className="h-full w-full object-cover"
               />
             </div>
 
-            <h1 className="text-2xl font-bold text-white">
+            <h1 className="text-2xl font-bold text-white sm:text-3xl">
               Chatting App
             </h1>
 
@@ -492,7 +488,7 @@ export default function ChatApp() {
                   setUsername(e.target.value)
                 }
                 required
-                className="w-full rounded-xl border border-slate-700 bg-slate-800/80 px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
+                className="w-full rounded-xl border border-slate-700 bg-slate-800/80 px-4 py-3.5 text-sm text-white placeholder-slate-500 outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
               />
             </div>
 
@@ -509,7 +505,7 @@ export default function ChatApp() {
                   setGroupName(e.target.value)
                 }
                 required
-                className="w-full rounded-xl border border-slate-700 bg-slate-800/80 px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
+                className="w-full rounded-xl border border-slate-700 bg-slate-800/80 px-4 py-3.5 text-sm text-white placeholder-slate-500 outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
               />
             </div>
 
@@ -522,67 +518,66 @@ export default function ChatApp() {
           </form>
         </div>
       ) : (
-        <div className="flex h-[620px] w-full max-w-2xl flex-col overflow-hidden rounded-3xl border border-white/10 bg-slate-900 shadow-2xl">
 
-          <div className="flex items-center justify-between border-b border-slate-800 bg-slate-900 px-4 py-4 sm:px-6">
+        /* CHAT SCREEN */
+        <div className="flex h-[calc(100dvh-24px)] min-h-[520px] w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-white/10 bg-slate-900 shadow-2xl sm:h-[calc(100dvh-48px)] sm:rounded-3xl lg:h-[700px]">
 
-            <div className="flex min-w-0 items-center gap-3">
+          {/* HEADER */}
+          <div className="flex shrink-0 items-center justify-between gap-3 border-b border-slate-800 bg-slate-900 px-3 py-3 sm:px-5 sm:py-4 md:px-6">
 
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600">
+            <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 sm:h-11 sm:w-11">
                 <img
                   src="/image copy 3.png"
                   alt="Chat Logo"
-                  className="h-full w-full rounded-xl object-cover"
+                  className="h-full w-full object-cover"
                 />
               </div>
 
               <div className="min-w-0">
-
-                <h1 className="truncate text-base font-bold text-white sm:text-lg">
+                <h1 className="max-w-[180px] truncate text-sm font-bold text-white sm:max-w-xs sm:text-lg">
                   Group: {groupName}
                 </h1>
 
-                <div className="mt-1 flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                <div className="mt-0.5 flex items-center gap-1.5 sm:mt-1 sm:gap-2">
+                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400 sm:h-2 sm:w-2" />
 
-                  <span className="truncate text-xs text-slate-400">
+                  <span className="max-w-[150px] truncate text-[11px] text-slate-400 sm:max-w-xs sm:text-xs">
                     {username}
                   </span>
                 </div>
-
               </div>
-
             </div>
 
             <button
               onClick={handleLeave}
-              className="shrink-0 rounded-xl bg-rose-500/10 px-4 py-2 text-sm font-semibold text-rose-400 transition hover:bg-rose-500/20 active:scale-95 sm:px-5"
+              className="shrink-0 rounded-xl bg-rose-500/10 px-3 py-2 text-xs font-semibold text-rose-400 transition hover:bg-rose-500/20 active:scale-95 sm:px-5 sm:text-sm"
             >
               Leave
             </button>
-
           </div>
 
-          <div className="flex-1 overflow-y-auto bg-slate-950/70 p-4 sm:p-6">
+          {/* MESSAGES */}
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain bg-slate-950/70 p-3 sm:p-5 md:p-6">
 
             {messages.length === 0 ? (
-              <div className="flex h-full flex-col items-center justify-center text-center">
+              <div className="flex h-full flex-col items-center justify-center px-4 text-center">
 
                 <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-indigo-500/10 text-2xl">
                   💭
                 </div>
 
-                <h2 className="text-base font-semibold text-slate-300">
+                <h2 className="text-base font-semibold text-slate-300 sm:text-lg">
                   No messages yet
                 </h2>
 
-                <p className="mt-1 max-w-xs text-sm text-slate-500">
+                <p className="mt-1 max-w-xs text-xs text-slate-500 sm:text-sm">
                   Send a message below to start the conversation.
                 </p>
-
               </div>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-3 sm:space-y-4">
 
                 {messages.map((msg) => {
                   const isMe =
@@ -602,29 +597,27 @@ export default function ChatApp() {
                         }
                       }}
                     >
-
                       <div
                         className={`${
                           isMe
                             ? "items-end"
                             : "items-start"
-                        } flex max-w-[82%] flex-col sm:max-w-[70%]`}
+                        } flex max-w-[88%] flex-col sm:max-w-[75%] md:max-w-[70%]`}
                       >
 
                         {!isMe && (
-                          <span className="mb-1 px-1 text-xs font-semibold text-indigo-400">
+                          <span className="mb-1 max-w-full truncate px-1 text-[11px] font-semibold text-indigo-400 sm:text-xs">
                             {msg.sender}
                           </span>
                         )}
 
                         <div
-                          className={`rounded-2xl px-3 py-2 shadow-sm ${
+                          className={`max-w-full rounded-2xl px-3 py-2 shadow-sm sm:px-3.5 sm:py-2.5 ${
                             isMe
                               ? "rounded-br-md bg-gradient-to-r from-indigo-500 to-violet-600 text-white"
                               : "rounded-bl-md border border-slate-800 bg-slate-900 text-slate-300"
                           }`}
                         >
-
                           {msg.type === "file" ? (
                             renderFileMessage(msg)
                           ) : (
@@ -634,9 +627,8 @@ export default function ChatApp() {
                           )}
 
                           <div className="mt-1 flex items-center justify-end gap-1">
-
                             <span
-                              className={`text-[10px] ${
+                              className={`text-[9px] sm:text-[10px] ${
                                 isMe
                                   ? "text-indigo-100"
                                   : "text-slate-500"
@@ -647,7 +639,7 @@ export default function ChatApp() {
 
                             {isMe && (
                               <span
-                                className={`text-xs font-bold ${
+                                className={`text-[11px] font-bold sm:text-xs ${
                                   msg.status === "read"
                                     ? "text-cyan-300"
                                     : "text-indigo-100"
@@ -658,26 +650,22 @@ export default function ChatApp() {
                                   : "✓✓"}
                               </span>
                             )}
-
                           </div>
-
                         </div>
-
                       </div>
-
                     </div>
                   );
                 })}
-
               </div>
             )}
-
           </div>
 
-          <div className="relative border-t border-slate-800 bg-slate-900 p-3 sm:p-4">
+          {/* INPUT AREA */}
+          <div className="relative shrink-0 border-t border-slate-800 bg-slate-900 p-2.5 sm:p-4">
 
+            {/* ATTACHMENT MENU */}
             {showAttachmentMenu && (
-              <div className="absolute bottom-20 left-3 z-50 w-56 overflow-hidden rounded-2xl border border-slate-700 bg-slate-800 p-2 shadow-2xl">
+              <div className="absolute bottom-[70px] left-2 z-50 w-[calc(100%-16px)] max-w-60 overflow-hidden rounded-2xl border border-slate-700 bg-slate-800 p-2 shadow-2xl sm:bottom-20 sm:left-4">
 
                 <button
                   type="button"
@@ -689,10 +677,7 @@ export default function ChatApp() {
                   <span className="text-xl">
                     📷
                   </span>
-
-                  <span>
-                    Photos
-                  </span>
+                  <span>Photos</span>
                 </button>
 
                 <button
@@ -705,10 +690,7 @@ export default function ChatApp() {
                   <span className="text-xl">
                     🎥
                   </span>
-
-                  <span>
-                    Videos
-                  </span>
+                  <span>Videos</span>
                 </button>
 
                 <button
@@ -721,10 +703,7 @@ export default function ChatApp() {
                   <span className="text-xl">
                     🎵
                   </span>
-
-                  <span>
-                    Audio
-                  </span>
+                  <span>Audio</span>
                 </button>
 
                 <button
@@ -737,15 +716,12 @@ export default function ChatApp() {
                   <span className="text-xl">
                     📄
                   </span>
-
-                  <span>
-                    Document
-                  </span>
+                  <span>Document</span>
                 </button>
-
               </div>
             )}
 
+            {/* FILE INPUTS */}
             <input
               ref={imageInputRef}
               type="file"
@@ -781,7 +757,7 @@ export default function ChatApp() {
               onSubmit={handleSendMessage}
               className="flex items-center gap-2 sm:gap-3"
             >
-
+              {/* ATTACHMENT BUTTON */}
               <button
                 type="button"
                 disabled={sendingFile}
@@ -790,11 +766,12 @@ export default function ChatApp() {
                     (prev) => !prev
                   )
                 }
-                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-slate-700 bg-slate-800 text-xl text-slate-300 transition hover:bg-slate-700 active:scale-95 disabled:opacity-50"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-slate-700 bg-slate-800 text-lg text-slate-300 transition hover:bg-slate-700 active:scale-95 disabled:opacity-50 sm:h-12 sm:w-12 sm:text-xl"
               >
                 📎
               </button>
 
+              {/* MESSAGE INPUT */}
               <input
                 type="text"
                 placeholder={
@@ -807,114 +784,120 @@ export default function ChatApp() {
                   setMessage(e.target.value)
                 }
                 disabled={sendingFile}
-                className="min-w-0 flex-1 rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition focus:border-indigo-500 focus:bg-slate-800 focus:ring-4 focus:ring-indigo-500/10 disabled:opacity-50"
+                className="min-w-0 flex-1 rounded-xl border border-slate-700 bg-slate-800 px-3 py-3 text-sm text-white placeholder-slate-500 outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 disabled:opacity-50 sm:px-4 sm:py-3"
               />
 
+              {/* SEND BUTTON */}
               <button
                 type="submit"
                 disabled={sendingFile}
-                className="shrink-0 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/10 transition hover:from-indigo-600 hover:to-violet-700 active:scale-[0.97] disabled:opacity-50 sm:px-6"
+                className="shrink-0 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-600 px-3.5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/10 transition hover:from-indigo-600 hover:to-violet-700 active:scale-[0.97] disabled:opacity-50 sm:px-6"
               >
-                Send
+                <span className="sm:hidden">
+                  ➤
+                </span>
+
+                <span className="hidden sm:inline">
+                  Send
+                </span>
               </button>
-
             </form>
-
           </div>
-
         </div>
       )}
 
+      {/* FILE VIEWER */}
       {viewer && (
         <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 p-3 backdrop-blur-sm sm:p-4"
           onClick={closeViewer}
         >
-
           <div
-            className="absolute left-0 right-0 top-0 flex items-center justify-between bg-gradient-to-b from-black/80 to-transparent px-4 py-5 sm:px-6"
+            className="absolute left-0 right-0 top-0 flex items-center justify-between gap-3 bg-gradient-to-b from-black/80 to-transparent px-3 py-4 sm:px-6 sm:py-5"
             onClick={(e) =>
               e.stopPropagation()
             }
           >
-
             <div className="min-w-0">
-
-              <p className="max-w-[220px] truncate text-sm font-semibold text-white sm:max-w-md">
+              <p className="max-w-[150px] truncate text-xs font-semibold text-white sm:max-w-md sm:text-sm">
                 {viewer.fileName}
               </p>
 
-              <p className="mt-1 text-xs text-slate-400">
+              <p className="mt-1 text-[10px] text-slate-400 sm:text-xs">
                 {formatFileSize(viewer.fileSize)}
               </p>
-
             </div>
 
-            <div className="flex items-center gap-2">
-
+            <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
               <a
                 href={viewer.fileData}
                 download={viewer.fileName}
-                className="flex h-10 items-center justify-center rounded-xl bg-white/10 px-4 text-sm font-semibold text-white transition hover:bg-white/20"
+                className="flex h-9 items-center justify-center rounded-xl bg-white/10 px-2.5 text-xs font-semibold text-white transition hover:bg-white/20 sm:h-10 sm:px-4 sm:text-sm"
                 onClick={(e) =>
                   e.stopPropagation()
                 }
               >
-                ⬇️ Download
+                <span className="sm:hidden">
+                  ⬇️
+                </span>
+
+                <span className="hidden sm:inline">
+                  ⬇️ Download
+                </span>
               </a>
 
               <button
                 type="button"
                 onClick={closeViewer}
-                className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-xl text-white transition hover:bg-white/20"
+                className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-lg text-white transition hover:bg-white/20 sm:h-10 sm:w-10 sm:text-xl"
               >
                 ✕
               </button>
-
             </div>
-
           </div>
 
+          {/* IMAGE VIEWER */}
           {viewer.fileType?.startsWith("image/") && (
             <img
               src={viewer.fileData}
               alt={viewer.fileName}
-              className="max-h-[85vh] max-w-[95vw] rounded-xl object-contain shadow-2xl"
+              className="max-h-[80vh] max-w-[95vw] rounded-xl object-contain shadow-2xl sm:max-h-[85vh]"
               onClick={(e) =>
                 e.stopPropagation()
               }
             />
           )}
 
+          {/* VIDEO VIEWER */}
           {viewer.fileType?.startsWith("video/") && (
             <video
               src={viewer.fileData}
               controls
               autoPlay
-              className="max-h-[85vh] max-w-[95vw] rounded-xl shadow-2xl"
+              className="max-h-[80vh] max-w-[95vw] rounded-xl shadow-2xl sm:max-h-[85vh]"
               onClick={(e) =>
                 e.stopPropagation()
               }
             />
           )}
 
+          {/* AUDIO VIEWER */}
           {viewer.fileType?.startsWith("audio/") && (
             <div
-              className="w-full max-w-md rounded-3xl border border-white/10 bg-slate-900 p-8 shadow-2xl"
+              className="w-[calc(100%-24px)] max-w-md rounded-3xl border border-white/10 bg-slate-900 p-5 shadow-2xl sm:p-8"
               onClick={(e) =>
                 e.stopPropagation()
               }
             >
-
-              <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-4xl shadow-lg">
+              <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-3xl shadow-lg sm:mb-6 sm:h-24 sm:w-24 sm:text-4xl">
                 🎵
               </div>
 
-              <h2 className="mb-2 truncate text-center text-lg font-bold text-white">
+              <h2 className="mb-2 truncate text-center text-base font-bold text-white sm:text-lg">
                 {viewer.fileName}
               </h2>
 
-              <p className="mb-6 text-center text-sm text-slate-400">
+              <p className="mb-5 text-center text-xs text-slate-400 sm:mb-6 sm:text-sm">
                 {formatFileSize(viewer.fileSize)}
               </p>
 
@@ -924,13 +907,10 @@ export default function ChatApp() {
                 autoPlay
                 className="w-full"
               />
-
             </div>
           )}
-
         </div>
       )}
-
     </div>
   );
 }
