@@ -351,12 +351,12 @@ export default function ChatApp() {
               e.stopPropagation();
               openViewer(msg);
             }}
-            className="block w-full cursor-pointer"
+            className="block w-full overflow-hidden rounded-xl cursor-pointer"
           >
             <img
               src={msg.fileData}
               alt={msg.fileName}
-              className="max-h-[320px] w-full rounded-xl object-contain transition hover:opacity-90 sm:max-h-[380px]"
+              className="block max-h-[320px] w-full rounded-xl object-contain transition hover:opacity-90 sm:max-h-[380px]"
             />
           </button>
 
@@ -386,7 +386,7 @@ export default function ChatApp() {
 
     if (msg.fileType?.startsWith("video/")) {
       return (
-        <div className="w-full min-w-0 max-w-full sm:max-w-sm">
+        <div className="w-full min-w-0 max-w-full overflow-hidden rounded-xl sm:max-w-sm">
           <button
             type="button"
             onClick={(e) => {
@@ -397,12 +397,12 @@ export default function ChatApp() {
           >
             <video
               src={msg.fileData}
-              className="max-h-[280px] w-full rounded-xl object-contain sm:max-h-[340px]"
+              className="block max-h-[280px] w-full rounded-xl object-contain sm:max-h-[340px]"
               preload="metadata"
               playsInline
             />
 
-            <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition hover:opacity-100">
+            <div className="absolute inset-0 flex items-center justify-center rounded-xl bg-black/20 opacity-0 transition hover:opacity-100">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-xl text-slate-900 shadow-xl sm:h-14 sm:w-14 sm:text-2xl">
                 ▶
               </div>
@@ -435,7 +435,7 @@ export default function ChatApp() {
 
     if (msg.fileType?.startsWith("audio/")) {
       return (
-        <div className="w-full min-w-0 max-w-sm">
+        <div className="w-full min-w-0 max-w-sm overflow-hidden rounded-xl">
           <button
             type="button"
             onClick={(e) => {
@@ -910,27 +910,31 @@ export default function ChatApp() {
           </div>
 
           {viewer.fileType?.startsWith("image/") && (
-            <img
-              src={viewer.fileData}
-              alt={viewer.fileName}
-              className="max-h-[82vh] max-w-[96vw] rounded-xl object-contain shadow-2xl sm:max-h-[85vh] sm:max-w-[95vw]"
-              onClick={(e) =>
-                e.stopPropagation()
-              }
-            />
+            <div
+              className="overflow-hidden rounded-xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={viewer.fileData}
+                alt={viewer.fileName}
+                className="block max-h-[82vh] max-w-[96vw] rounded-xl object-contain shadow-2xl sm:max-h-[85vh] sm:max-w-[95vw]"
+              />
+            </div>
           )}
 
           {viewer.fileType?.startsWith("video/") && (
-            <video
-              src={viewer.fileData}
-              controls
-              autoPlay
-              playsInline
-              className="max-h-[82vh] max-w-[96vw] rounded-xl shadow-2xl sm:max-h-[85vh] sm:max-w-[95vw]"
-              onClick={(e) =>
-                e.stopPropagation()
-              }
-            />
+            <div
+              className="overflow-hidden rounded-xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <video
+                src={viewer.fileData}
+                controls
+                autoPlay
+                playsInline
+                className="block max-h-[82vh] max-w-[96vw] rounded-xl shadow-2xl sm:max-h-[85vh] sm:max-w-[95vw]"
+              />
+            </div>
           )}
 
           {viewer.fileType?.startsWith("audio/") && (
