@@ -853,7 +853,7 @@ export default function ChatApp() {
                 </span>
 
                 <span className="xs:hidden">
-                  ➤
+                  Send
                 </span>
               </button>
             </form>
@@ -891,11 +891,10 @@ export default function ChatApp() {
                 }
               >
                 <span className="sm:hidden">
-                  ⬇️
                 </span>
 
                 <span className="hidden sm:inline">
-                  ⬇️ Download
+                  Download
                 </span>
               </a>
 
