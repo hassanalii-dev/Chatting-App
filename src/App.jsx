@@ -5,6 +5,7 @@ const socket = io(
   "https://chatting-app-server-production.up.railway.app",
   {
     transports: ["websocket", "polling"],
+    maxHttpBufferSize: 50 * 1024 * 1024,
   }
 );
 
@@ -36,7 +37,11 @@ export default function ChatApp() {
         );
 
         if (alreadyExists) {
-          return prevMessages;
+          return prevMessages.map((msg) =>
+            msg.id === incomingMessage.id
+              ? { ...msg, status: "delivered" }
+              : msg
+          );
         }
 
         return [
@@ -156,7 +161,7 @@ export default function ChatApp() {
         hour: "2-digit",
         minute: "2-digit",
       }),
-      status: "delivered",
+      status: "sent",
     };
 
     socket.emit("send", newMessage);
@@ -300,7 +305,7 @@ export default function ChatApp() {
           minute: "2-digit",
         }),
 
-        status: "delivered",
+        status: "sent",
       };
 
       socket.emit("send", fileMessage);
@@ -394,6 +399,7 @@ export default function ChatApp() {
               src={msg.fileData}
               className="max-h-[280px] w-full rounded-xl object-contain sm:max-h-[340px]"
               preload="metadata"
+              playsInline
             />
 
             <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition hover:opacity-100">
@@ -861,7 +867,6 @@ export default function ChatApp() {
           className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-black/95 p-2 backdrop-blur-sm sm:p-4"
           onClick={closeViewer}
         >
-          {/* Viewer Header */}
           <div
             className="absolute left-0 right-0 top-0 z-10 flex items-start justify-between gap-3 bg-gradient-to-b from-black/90 via-black/60 to-transparent px-3 pb-10 pt-3 sm:px-5 sm:pt-5 md:px-6"
             onClick={(e) => e.stopPropagation()}
@@ -904,7 +909,6 @@ export default function ChatApp() {
             </div>
           </div>
 
-          {/* Image Viewer */}
           {viewer.fileType?.startsWith("image/") && (
             <img
               src={viewer.fileData}
@@ -916,7 +920,6 @@ export default function ChatApp() {
             />
           )}
 
-          {/* Video Viewer */}
           {viewer.fileType?.startsWith("video/") && (
             <video
               src={viewer.fileData}
@@ -930,7 +933,6 @@ export default function ChatApp() {
             />
           )}
 
-          {/* Audio Viewer */}
           {viewer.fileType?.startsWith("audio/") && (
             <div
               className="w-[calc(100%-24px)] max-w-md rounded-3xl border border-white/10 bg-slate-900 p-5 shadow-2xl sm:w-full sm:p-8"
